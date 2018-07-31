@@ -558,12 +558,11 @@ MGL_EXPORT IB_DESIGNABLE
 /**
  A Boolean value that determines whether the updating pitch will also affect the altitude.
  
- When this property is set to `NO`, pitch will work independently from altitude.
- The default value of this property is YES.
- 
- Setting this property to NO will allow animation libraries outside of this SDK to control the
+ Setting this property to `NO` will allow animation libraries outside of this SDK to control the
  map camera without the built-in side effect that pitch influences altitude. This will make the
  results of using outside animation more predictable and easier to control.
+ 
+ The default value of this property is YES.
  */
 @property(nonatomic, getter=isCameraAltitudeAffectedByPitch) BOOL cameraAltitudeAffectedByPitch;
 
@@ -870,9 +869,6 @@ MGL_EXPORT IB_DESIGNABLE
 
 /**
  Moves the viewpoint to a different location without using a transition.
- 
- Transition animations can be defined by other classes and use this method to
- update the map.
  
  @param camera The new viewpoint.
  @param edgePadding The minimum padding (in screen points) that would be visible
