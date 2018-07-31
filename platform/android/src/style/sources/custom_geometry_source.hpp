@@ -28,8 +28,11 @@ public:
 
     ~CustomGeometrySource();
 
+    bool removeFromMap(JNIEnv&, jni::Object<Source>, mbgl::Map&);
+
     void fetchTile(const mbgl::CanonicalTileID& tileID);
     void cancelTile(const mbgl::CanonicalTileID& tileID);
+    void releaseThreads();
     void setTileData(jni::JNIEnv& env, jni::jint z, jni::jint x, jni::jint y, jni::Object<geojson::FeatureCollection> jf);
 
     void invalidateTile(jni::JNIEnv& env, jni::jint z, jni::jint x, jni::jint y);
