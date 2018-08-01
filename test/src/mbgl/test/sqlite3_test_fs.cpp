@@ -154,10 +154,34 @@ static int sqlite3_test_fs_device_characteristics(sqlite3_file* file) {
     return unix_fs_methods->xDeviceCharacteristics(file);
 }
 
+static int sqlite3_test_fs_shm_map(sqlite3_file* file, int iPg, int pgsz, int i, void volatile** v) {
+    return unix_fs_methods->xShmMap(file, iPg, pgsz, i, v);
+}
+
+static int sqlite3_test_fs_shm_lock(sqlite3_file* file, int offset, int n, int flags) {
+    return unix_fs_methods->xShmLock(file, offset, n, flags);
+}
+
+static void sqlite3_test_fs_shm_barrier(sqlite3_file* file) {
+    unix_fs_methods->xShmBarrier(file);
+}
+
+static int sqlite3_test_fs_shm_unmap(sqlite3_file* file, int deleteFlag) {
+    return unix_fs_methods->xShmUnmap(file, deleteFlag);
+}
+
+static int sqlite3_test_fs_shm_fetch(sqlite3_file* file, sqlite3_int64 iOfst, int iAmt, void **pp) {
+    return unix_fs_methods->xFetch(file, iOfst, iAmt, pp);
+}
+
+static int sqlite3_test_fs_shm_unfetch(sqlite3_file* file, sqlite3_int64 iOfst, void *p) {
+    return unix_fs_methods->xUnfetch(file, iOfst, p);
+}
+
 static sqlite3_vfs test_fs;
 
 static sqlite3_io_methods sqlite3_test_fs_methods = {
-    1,
+    3,
     sqlite3_test_fs_close,
     sqlite3_test_fs_read,
     sqlite3_test_fs_write,
@@ -170,12 +194,12 @@ static sqlite3_io_methods sqlite3_test_fs_methods = {
     sqlite3_test_fs_file_control,
     sqlite3_test_fs_sector_size,
     sqlite3_test_fs_device_characteristics,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0
+    sqlite3_test_fs_shm_map,
+    sqlite3_test_fs_shm_lock,
+    sqlite3_test_fs_shm_barrier,
+    sqlite3_test_fs_shm_unmap,
+    sqlite3_test_fs_shm_fetch,
+    sqlite3_test_fs_shm_unfetch
 };
 
 static int sqlite3_test_fs_open(sqlite3_vfs* vfs, const char* zName, sqlite3_file* file, int flags, int* pOutFlags) {
