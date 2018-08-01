@@ -95,32 +95,14 @@ static int sqlite3_test_fs_file_size(sqlite3_file* file, sqlite3_int64* pSize) {
 }
 
 static int sqlite3_test_fs_lock(sqlite3_file* file, int lockType) {
-    if (sqlite3_test_fs_debug) {
-        // fprintf(stderr, "SQLite3: lock(%p, type=%d)\n", file, lockType);
-    }
-    if (!sqlite3_test_fs_io) {
-        return SQLITE_AUTH;
-    }
     return unix_fs_methods->xLock(file, lockType);
 }
 
 static int sqlite3_test_fs_unlock(sqlite3_file* file, int lockType) {
-    if (sqlite3_test_fs_debug) {
-        // fprintf(stderr, "SQLite3: unlock(%p, type=%d)\n", file, lockType);
-    }
-    if (!sqlite3_test_fs_io) {
-        return SQLITE_AUTH;
-    }
     return unix_fs_methods->xUnlock(file, lockType);
 }
 
 static int sqlite3_test_fs_check_reserved_lock(sqlite3_file* file, int* pResOut) {
-    if (sqlite3_test_fs_debug) {
-        // fprintf(stderr, "SQLite3: check_reserved_lock(%p)\n", file);
-    }
-    if (!sqlite3_test_fs_io) {
-        return SQLITE_AUTH;
-    }
     return unix_fs_methods->xCheckReservedLock(file, pResOut);
 }
 
