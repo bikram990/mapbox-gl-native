@@ -4,49 +4,49 @@ workflows:
   version: 2
   default:
     jobs:
-      - nitpick
-      - clang-tidy:
-          filters:
-            branches:
-              ignore: master
-      - android-debug-arm-v7
-      - android-release:
-          filters:
-            tags:
-              only: /android-v.*/
-      - node-clang39-release:
-          filters:
-            tags:
-              only: /node-.*/
-      - node-gcc6-debug:
-          filters:
-            tags:
-              only: /node-.*/
-      - node-macos-release:
-          filters:
-            tags:
-              only: /node-.*/
-      - linux-clang-3.8-libcxx-debug
-      - linux-clang4-sanitize-address
-      - linux-clang4-sanitize-undefined
-      - linux-clang4-sanitize-thread
+      # - nitpick
+      # - clang-tidy:
+      #     filters:
+      #       branches:
+      #         ignore: master
+      # - android-debug-arm-v7
+      # - android-release:
+      #     filters:
+      #       tags:
+      #         only: /android-v.*/
+      # - node-clang39-release:
+      #     filters:
+      #       tags:
+      #         only: /node-.*/
+      # - node-gcc6-debug:
+      #     filters:
+      #       tags:
+      #         only: /node-.*/
+      # - node-macos-release:
+      #     filters:
+      #       tags:
+      #         only: /node-.*/
+      # - linux-clang-3.8-libcxx-debug
+      # - linux-clang4-sanitize-address
+      # - linux-clang4-sanitize-undefined
+      # - linux-clang4-sanitize-thread
       - linux-gcc4.9-debug
-      - linux-gcc5-debug-coverage
-      - ios-debug
-      - ios-sanitize
-      - ios-sanitize-address
-      - ios-static-analyzer
-      - ios-release
-      - ios-release-tag:
-          filters:
-            tags:
-              only: /ios-.*/
-            branches:
-              ignore: /.*/
-      - macos-debug
-      - qt4-linux-gcc5-release
-      - qt5-linux-gcc5-release
-      - qt5-macos-debug
+      # - linux-gcc5-debug-coverage
+      # - ios-debug
+      # - ios-sanitize
+      # - ios-sanitize-address
+      # - ios-static-analyzer
+      # - ios-release
+      # - ios-release-tag:
+      #     filters:
+      #       tags:
+      #         only: /ios-.*/
+      #       branches:
+      #         ignore: /.*/
+      # - macos-debug
+      # - qt4-linux-gcc5-release
+      # - qt5-linux-gcc5-release
+      # - qt5-macos-debug
   nightly:
     triggers:
       - schedule:

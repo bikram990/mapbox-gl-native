@@ -194,12 +194,13 @@ TEST(OfflineDatabase, TEST_REQUIRES_WRITE(CreateFail)) {
 #endif // __QT__
 
 TEST(OfflineDatabase, TEST_REQUIRES_WRITE(SchemaVersion)) {
+    sleep(1);
     FixtureLog log;
     deleteDatabaseFiles();
 
     {
         mapbox::sqlite::Database db = mapbox::sqlite::Database::open(filename, mapbox::sqlite::ReadWriteCreate);
-        db.setBusyTimeout(Milliseconds::max());
+        db.setBusyTimeout(Milliseconds(1000));
         db.exec("PRAGMA user_version = 1");
     }
 
