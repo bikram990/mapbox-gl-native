@@ -556,17 +556,6 @@ MGL_EXPORT IB_DESIGNABLE
 @property(nonatomic, getter=isHapticFeedbackEnabled) BOOL hapticFeedbackEnabled;
 
 /**
- A Boolean value that determines whether the updating pitch will also affect the altitude.
- 
- Setting this property to `NO` will allow animation libraries outside of this SDK to control the
- map camera without the built-in side effect that pitch influences altitude. This will make the
- results of using outside animation more predictable and easier to control.
- 
- The default value of this property is YES.
- */
-@property(nonatomic, getter=isCameraAltitudeAffectedByPitch) BOOL cameraAltitudeAffectedByPitch;
-
-/**
  A floating-point value that determines the rate of deceleration after the user
  lifts their finger.
 
