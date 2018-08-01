@@ -183,18 +183,22 @@ static int sqlite3_test_fs_open(sqlite3_vfs* vfs, const char* zName, sqlite3_fil
         fprintf(stderr, "SQLite3: open(name=%s, flags=%d) -> %p\n", zName, flags, file);
     }
     if (!sqlite3_test_fs_io) {
+        file->pMethods = NULL;
         return SQLITE_AUTH;
     }
     if (!sqlite3_test_fs_file_open) {
+        file->pMethods = NULL;
         return SQLITE_CANTOPEN;
     }
     if (!sqlite3_test_fs_file_create) {
         int res;
         const int result = unix_fs->xAccess(vfs, zName, SQLITE_ACCESS_EXISTS, &res);
         if (result != SQLITE_OK) {
+            file->pMethods = NULL;
             return result;
         }
         if (res != 1) {
+            file->pMethods = NULL;
             return SQLITE_CANTOPEN;
         }
     }
@@ -202,6 +206,8 @@ static int sqlite3_test_fs_open(sqlite3_vfs* vfs, const char* zName, sqlite3_fil
     if (status == SQLITE_OK) {
         unix_fs_methods = file->pMethods;
         file->pMethods = &sqlite3_test_fs_methods;
+    } else {
+        file->pMethods = NULL;
     }
     return status;
 }
